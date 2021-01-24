@@ -1,5 +1,6 @@
 package com.ft.emulator.server.game.core.game;
 
+import com.ft.emulator.common.utilities.BitKit;
 import com.ft.emulator.server.game.core.game.handler.GamePacketHandler;
 import com.ft.emulator.server.game.core.packet.PacketID;
 import com.ft.emulator.server.networking.Connection;
@@ -238,6 +239,8 @@ public class GameServerNetworkListener implements ConnectionListener {
                 break;
 
             default:
+
+                log.info("UNKNOWN PACKET [" + String.format("0x%x", (int) packet.getPacketId()) + "] " + BitKit.toString(packet.getRawPacket(), 0, packet.getDataLength() + 8));
                 gamePacketHandler.handleUnknown(connection, packet);
                 break;
         }
